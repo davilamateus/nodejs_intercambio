@@ -40,12 +40,12 @@ router.post('/user/forget-password',(req,res)=>{
                 host: "smtp.hostinger.com", 
                 port: 465,
                 auth: {
-                  user: "no-reply@mateusdavila.com", 
+                  user: "new-password@mateusdavila.com", 
                   pass: "Goias123.", 
                 },
               });
               let info =  transporter.sendMail({
-                from: "no-reply@mateusdavila.com",
+                from: "new-password@mateusdavila.com",
                 to: `${email}`, 
                 subject: "YET Planejador - Verificação de Email!",
                 text: "Here's a text version of the email.",
