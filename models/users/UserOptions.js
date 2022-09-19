@@ -13,7 +13,7 @@ const UserOptions = connection.define('userOptions',{
         allowNull:false
     },
     goal:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false
     },
     photo:{

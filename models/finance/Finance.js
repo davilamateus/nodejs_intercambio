@@ -9,14 +9,13 @@ const Finance = connection.define('finance',{
         allowNull:false
     },
     value:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false
     }
 
 });
 
 Finance.belongsTo(Users)
-
 //Finance.sync({force:true})
 
 module.exports = Finance
