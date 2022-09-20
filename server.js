@@ -14,6 +14,7 @@ const CategoryModel = require('./models/blog/CategoryModel');
 const AdsModel = require('./models/ads/ads');
 const Article = require('./models/blog/ArticleModel');
 const Radio = require('./models/radio/RadioModels')
+const StudyModel = require('./models/study/StudyModels')
 const UsersController = require('./controllers/users/Users')
 const UserOptionsController = require('./controllers/users/UserOptions')
 const ToDoListController = require('./controllers/todolist/ToDoList')
@@ -24,6 +25,7 @@ const CategoryController = require('./controllers/blog/CategoryController');
 const ArticleController = require('./controllers/blog/ArticleController');
 const RadioController = require('./controllers/radios/RadiosController');
 const AdsController = require('./controllers/ads/AdsController');
+const StudyController = require('./controllers/study/StudyController');
 
 app.use(cors())
 app.use(bodyPaser.json());
@@ -51,6 +53,7 @@ app.use('/', CategoryController)
 app.use('/', ArticleController)
 app.use('/', RadioController)
 app.use('/', AdsController)
+app.use('/', StudyController)
 
 
 
