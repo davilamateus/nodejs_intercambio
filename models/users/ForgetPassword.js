@@ -7,7 +7,7 @@ const Api = require('./../../database/database')
                 allowNull:false
             },
             userId:{
-                type:Sequelize.STRING,
+                type:Sequelize.INTEGER,
                 allowNull:false
             },
             status:{

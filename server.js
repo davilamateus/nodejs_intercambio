@@ -6,15 +6,19 @@ const cors = require('cors')
 
 const Users = require('./models/users/Users');
 const ToDoList = require('./models/todolist/ToDoList');
-const Financce = require('./models/finance/Finance');
+const Financce = require('./models/finance/FinanceModel');
 const UserOptions = require('./models/users/UserOptions');
 const VerificEmailModel = require('./models/users/VerificEmail')
 const ForgetPasswordModels = require('./models/users/ForgetPassword')
 const CategoryModel = require('./models/blog/CategoryModel');
-const AdsModel = require('./models/ads/ads');
+const AdsModel = require('./models/ads/AdsModel');
 const Article = require('./models/blog/ArticleModel');
 const Radio = require('./models/radio/RadioModels')
-const StudyModel = require('./models/study/StudyModels')
+const WordsModel = require('./models/study/WordsModels')
+const CoursesModel = require('./models/study/CoursesModels')
+const CountryModel = require('./models/countries/CountryModel')
+const CitysModel = require('./models/cities/CityModel')
+const CommercialModel = require('./models/users/CommercialUser')
 const UsersController = require('./controllers/users/Users')
 const UserOptionsController = require('./controllers/users/UserOptions')
 const ToDoListController = require('./controllers/todolist/ToDoList')
@@ -25,7 +29,11 @@ const CategoryController = require('./controllers/blog/CategoryController');
 const ArticleController = require('./controllers/blog/ArticleController');
 const RadioController = require('./controllers/radios/RadiosController');
 const AdsController = require('./controllers/ads/AdsController');
-const StudyController = require('./controllers/study/StudyController');
+const WordsController = require('./controllers/study/WordsController');
+const CoursesControoler = require('./controllers/study/CoursesController');
+const CountryController = require('./controllers/citys/Country');
+const CitiesController = require('./controllers/citys/CityController');
+const CommercialUserController = require('./controllers/users/Commercial');
 
 app.use(cors())
 app.use(bodyPaser.json());
@@ -53,7 +61,11 @@ app.use('/', CategoryController)
 app.use('/', ArticleController)
 app.use('/', RadioController)
 app.use('/', AdsController)
-app.use('/', StudyController)
+app.use('/', WordsController)
+app.use('/', CountryController)
+app.use('/', CoursesControoler)
+app.use('/', CitiesController)
+app.use('/', CommercialUserController)
 
 
 

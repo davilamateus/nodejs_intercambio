@@ -12,18 +12,26 @@ const toDoList = connection.define('toDoList',{
         type:Sequelize.STRING,
         allowNull:false
     },
+    category:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
     status:{
-        type:Sequelize.BOOLEAN,
+        type:Sequelize.STRING,
         allowNull:false
     },
     userId:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false
+    },
+    position:{
+        type:Sequelize.INTEGER,
+        allowNull:null
     }
 
 });
 
-//toDoList.belongsTo(Users)
-//toDoList.sync({force:true})
+toDoList.belongsTo(Users);
+//toDoList.sync({force:true});
 
-module.exports = toDoList
+module.exports = toDoList;

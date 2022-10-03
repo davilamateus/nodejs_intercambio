@@ -1,97 +1,106 @@
 const express = require('express');
 const router = express.Router();
-const AdsModel = require('./../../models/ads/ads');
-const auth = require('./../../middleware/userMiddleware')
+const AdsModel = require('./../../models/ads/AdsModel');
+const auth = require('./../../middleware/userMiddleware');
+const { Op } = require("sequelize");
 
 
 
-router.post('/admin/ads/', auth, (req,res)=>{
 
-    const {title, img, country,link}  = req.body;
+router.post('/admin/ads/', auth, (req, res) => {
 
+    const { title, country, imgWeb, imgMobile, link, category } = req.body;
 
-    if(req.user.category == '2'){
+    if (req.user.category == '2') {
 
-        if(title !== undefined && img !== undefined && country !== undefined &link !== undefined){
-        
+        if (title !== undefined && link !== undefined && country !== undefined && imgWeb !== undefined && category !== undefined && imgMobile !== undefined) {
+
             AdsModel.create({
-                        title:title,
-                        img:img,
-                        country:country,
-                        link:link
-                    })
-                    res.status(200).json({success:'Ads Add'})
+                title: title,
+                category: category,
+                country: country,
+                imgWeb: imgWeb,
+                imgMobile: imgMobile,
+                link: link})
+                .then(() => {res.status(200).json({ success: 'Ads Add' })})
+                .catch((error) => { res.status(400).json(error) });
 
-        } else{
-            res.status(201).json({Error:'Fault Infors'})
+        } else {
+            res.status(201).json({ Error: 'Fault Infors' });
 
         }
 
-    } else{
-        res.status(204).json({error:'No Auth'})
+    } else {
+        res.status(204).json({ error: 'No Auth' });
     }
 
 });
 
-router.get('/ads',(req,res)=>{
+router.get('/ads', (req, res) => {
     const country = req.query['country'];
+    const category = req.query['category'];
 
-    AdsModel.findAll({where:{country:country}}).then((data)=>{
-        res.status(200).json(data)
-    })
+    AdsModel.findAll({ 
+        where:{[Op.and]: [{ categoryId:category}, { country: country }]}})
+            .then((data) => { res.status(200).json(data) })
+            .catch((error) => { res.status(400).json(error) });
 
 });
 
-router.patch('/admin/ads/', auth, (req,res)=>{
+router.patch('/admin/ads/', auth, (req, res) => {
 
-    const {title, img, country,link,id}  = req.body;
+    const { title, category, country, link, id,imgWeb,imgMobile } = req.body;
 
 
-    if(req.user.category == '2'){
+    if (req.user.category == '2') {
 
-        if(title !== undefined && img !== undefined && country !== undefined &link !== undefined && id !== undefined){
-        
+        if (title !== undefined && imgMobile !== undefined && country !== undefined & link !== undefined && id !== undefined) {
+
             AdsModel.update({
-                        title:title,
-                        img:img,
-                        country:country,
-                        link:link
-                    },{where:{id:id}})
-                    res.status(200).json({success:'Ads Update'})
+                title: title,
+                category: category,
+                country: country,
+                imgWeb: imgWeb,
+                imgMobile: imgMobile,
+                link: link
+            }, { where: { id: id } })
+                .then(() => { res.status(200).json({ success: 'Ads Update' }) })
+                .catch((error) => { res.status(400).json(error) });
 
-        } else{
-            res.status(201).json({Error:'Fault Infors'})
+        } else {
+            res.status(201).json({ Error: 'Fault Infors' });
 
         }
 
-    } else{
-        res.status(204).json({error:'No Auth'})
+    } else {
+        res.status(204).json({ error: 'No Auth' });
     }
 
 });
 
 
-router.delete('/admin/ads/', auth, (req,res)=>{
+router.delete('/admin/ads/', auth, (req, res) => {
 
-    const {title, img, country,link,id}  = req.body;
+    const {id } = req.body;
 
 
-    if(req.user.category == '2'){
+    if (req.user.category == '2') {
 
-        if(id!== undefined){
-        
-            AdsModel.destroy({where:{id:id}})
-                    res.status(200).json({success:'Ads Delete'})
+        if (id !== undefined) {
 
-        } else{
-            res.status(201).json({Error:'Fault Infors'})
+            AdsModel.destroy({ where: { id: id } })
+            .then(() => { res.status(200).json({ success: 'Ads Delete' }) })
+            .catch((error) => { res.status(400).json(error) });
+
+        } else {
+            res.status(201).json({ Error: 'Fault Infors' });
 
         }
 
-    } else{
-        res.status(204).json({error:'No Auth'})
+    } else {
+        res.status(204).json({ error: 'No Auth' });
     }
 
 });
 
-module.exports = router
+module.exports = router;

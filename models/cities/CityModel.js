@@ -1,27 +1,26 @@
 const Sequelize = require('sequelize');
 const Api = require('../../database/database');
+const CountryModell = require('../countries/CountryModel')
 
 
-const RadioModel = Api.define('radios',{
+const City = Api.define('city',{
     title:{
         type:Sequelize.STRING,
-        allowNull:false
+        allowNull:false,
     },
-    link:{
-        type:Sequelize.STRING,
+    description:{
+        type:Sequelize.TEXT,
         allowNull:false
     },
     img:{
         type:Sequelize.STRING,
         allowNull:false
-    },
-    countryId:{
-        type:Sequelize.STRING,
-        allowNull:false
     }
 });
 
+City.belongsTo(CountryModell);
 
-//RadioModel.sync({force:true});
+//City.sync({force:true})
 
-module.exports = RadioModel;
+module.exports = City;
+

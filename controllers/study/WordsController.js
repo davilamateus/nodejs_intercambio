@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const StudyModel = require('./../../models/study/StudyModels');
-const auth = require('./../../middleware/userMiddleware')
+const StudyModel = require('../../models/study/WordsModels');
+const auth = require('../../middleware/userMiddleware')
 const { Op } = require("sequelize");
 
 
@@ -5013,20 +5013,15 @@ list.map((item)=>{
                         level:0
                     })
                 })
+                .then(()=>{res.status(200).json({success:'study Add'})})
+                .catch((error)=>{res.status(400).json(error)})
                 
-                res.status(200).json({success:'study Add'})
-        
-
-   
-
-    
 
 });
 
 router.post('/admin/study/', auth, (req,res)=>{
 
     const {title, img, country,link}  = req.body;
-
 
     if(req.user.category == '2'){
 
@@ -5037,8 +5032,7 @@ router.post('/admin/study/', auth, (req,res)=>{
                         img:img,
                         country:country,
                         link:link
-                    })
-                    res.status(200).json({success:'study Add'})
+                    }).then(()=>{res.status(200).json({success:'study Add'})}).catch((error)=>{res.status(400).json(error)})
 
         } else{
             res.status(201).json({Error:'Fault Infors'})
@@ -5068,9 +5062,7 @@ router.get('/study', auth,(req,res)=>{
             ["level","DESC"]
         ],
         limit : [((page-1)*20), 20],
-    }).then((data)=>{
-        res.status(200).json(data)
-    })
+    }).then((data)=>{res.status(200).json(data)}).catch((error)=>{res.status(400).json(error)})
 }
 });
 
@@ -5086,8 +5078,7 @@ router.patch('/study', auth, (req,res)=>{
                     },{
                         where:{[Op.and]: [{ id: questionId }, { userId: req.user.id }]}                    
                     
-                    })
-                    res.status(200).json({success:'study Update'})
+                    }).then(()=>{res.status(200).json({success:'study Update'})}).catch((error)=>{res.status(400).json(error)})
 
         } else{
             res.status(201).json({Error:'Fault Infors'})
@@ -5108,8 +5099,7 @@ router.delete('/admin/study/', auth, (req,res)=>{
 
         if(id!== undefined){
         
-            StudyModel.destroy({where:{id:id}})
-                    res.status(200).json({success:'study Delete'})
+            StudyModel.destroy({where:{id:id}}).then(()=>{res.status(200).json({success:'study Delete'})}).catch((error)=>{res.status(400).json(error)})
 
         } else{
             res.status(201).json({Error:'Fault Infors'})
@@ -5125,4 +5115,4 @@ router.delete('/admin/study/', auth, (req,res)=>{
 
 
 
-module.exports = router
+module.exports = router;

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const Api = require('../../database/database');
-const CategoryModel = require('./CategoryModel')
+const CategoryModel = require('./CategoryModel');
 
 
 const Article = Api.define('article',{
@@ -12,12 +12,12 @@ const Article = Api.define('article',{
         type:Sequelize.TEXT,
         allowNull:false
     },
-    country:{
+    countryId:{
         type:Sequelize.STRING,
         allowNull:false
     },
     categoryId:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false
     },
     img:{

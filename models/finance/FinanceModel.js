@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const connection = require('../../database/database');
-const Users = require('../users/Users')
+const Users = require('../users/Users');
 
 
 const Finance = connection.define('finance',{
@@ -8,6 +8,11 @@ const Finance = connection.define('finance',{
         type:Sequelize.STRING,
         allowNull:false
     },
+    category:{
+        type:Sequelize.INTEGER,
+        allowNull:false
+    },
+    
     value:{
         type:Sequelize.INTEGER,
         allowNull:false
@@ -15,7 +20,7 @@ const Finance = connection.define('finance',{
 
 });
 
-Finance.belongsTo(Users)
-//Finance.sync({force:true})
+Finance.belongsTo(Users);
+//Finance.sync({force:true});
 
-module.exports = Finance
+module.exports = Finance;

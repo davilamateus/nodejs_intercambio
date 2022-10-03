@@ -32,7 +32,6 @@ router.get('/user', auth, (req,res)=>{
    Users.findOne({where:{id:user.id}}).then((data)=>{
       if(data!==null){
             res.status(200).json({name:data.name,id:data.id,email:data.email})
-         console.log(data)
      } else{res.status(202).json({error:'User no fault'});}
      });
 });

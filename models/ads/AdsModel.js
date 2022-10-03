@@ -7,21 +7,31 @@ const Ads = connection.define('ads',{
         type:Sequelize.STRING,
         allowNull:false
     },
-    country:{
-        type:Sequelize.STRING,
-        allowNull:false
-    },
-    img:{
-        type:Sequelize.STRING,
+    countryId:{
+        type:Sequelize.INTEGER,
         allowNull:false
     },
     link:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    category:{
+        type:Sequelize.INTEGER,
+        allowNull:null
+    },
+    imgWeb:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    imgMobile:{
         type:Sequelize.STRING,
         allowNull:false
     }
 
 });
 
-//Ads.sync({force:true})
 
-module.exports = Ads
+
+//Ads.sync({force:true});
+
+module.exports = Ads;

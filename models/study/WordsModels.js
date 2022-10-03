@@ -2,12 +2,12 @@ const Sequelize = require('sequelize');
 const Api = require('../../database/database');
 
 
-const Study = Api.define('english',{
+const Words = Api.define('words',{
     title:{
         type:Sequelize.STRING,
         allowNull:false
     },
-    english:{
+    original:{
         type:Sequelize.STRING,
         allowNull:false
     },
@@ -15,7 +15,7 @@ const Study = Api.define('english',{
         type:Sequelize.STRING,
         allowNull:false
     },
-    userId:{
+    courseId:{
         type:Sequelize.INTEGER,
         allowNull:false
     },
@@ -26,6 +26,5 @@ const Study = Api.define('english',{
 });
 
 
-//Study.sync({force:true});
-
-module.exports = Study
+//Words.sync({force:true});
+module.exports = Words;

@@ -14,5 +14,5 @@ const Email = connection.define('verificEmail',{
 
 //VerificEmail.sync({force:true})
 
-module.exports = Email
+module.exports = Email;
 

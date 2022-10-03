@@ -9,7 +9,7 @@ const Category = Api.define('category',{
     }
 });
 
-//Category.sync({force:true})
+//Category.sync({force:true});
 
 module.exports = Category;
 

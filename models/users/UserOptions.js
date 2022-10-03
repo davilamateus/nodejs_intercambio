@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const connection = require('../../database/database');
-const Users = require('./Users')
+const Users = require('./Users');
 
 
 const UserOptions = connection.define('userOptions',{
-    country:{
+    countryId:{
         type:Sequelize.STRING,
         allowNull:false
     },
@@ -29,14 +29,14 @@ const UserOptions = connection.define('userOptions',{
         allowNull:false
     },
     userId:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false
     }
 
 });
 
-UserOptions.belongsTo(Users)
+UserOptions.belongsTo(Users);
 
-//UserOptions.sync({force:true})
+//UserOptions.sync({force:true});
 
-module.exports = UserOptions
+module.exports = UserOptions;

@@ -16,7 +16,7 @@ const Users = connection.define('users',{
         allowNull:false
     },
     category:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false
     },
     verified:{
@@ -25,6 +25,6 @@ const Users = connection.define('users',{
     }
 });
 
-//Users.sync({force:false})
+//Users.sync({force:false});
 
-module.exports = Users
+module.exports = Users;

@@ -2,12 +2,12 @@ const Sequelize = require('sequelize');
 const Api = require('../../database/database');
 
 
-const RadioModel = Api.define('radios',{
+const Courses = Api.define('courses',{
     title:{
         type:Sequelize.STRING,
         allowNull:false
     },
-    link:{
+    language:{
         type:Sequelize.STRING,
         allowNull:false
     },
@@ -15,13 +15,12 @@ const RadioModel = Api.define('radios',{
         type:Sequelize.STRING,
         allowNull:false
     },
-    countryId:{
+    level:{
         type:Sequelize.STRING,
         allowNull:false
     }
 });
 
 
-//RadioModel.sync({force:true});
-
-module.exports = RadioModel;
+//Courses.sync({force:true});
+module.exports = Courses;

@@ -8,6 +8,7 @@ const { Op } = require("sequelize");
 const multer = require('multer')
 const uuid = require('uuid')
 const path = require('path')
+const UserIncluse = require('./../../models/users/Users')
 
 
 
@@ -15,7 +16,6 @@ const path = require('path')
 router.post('/user/useroptions/',auth,(req,res)=>{
     const {city,country,goal,lang,photo,when} = req.body;
     const user = req.user;
-    res.json({user})
     UserOptions.create({
         city:city,
         userId:user.id, 
@@ -24,18 +24,20 @@ router.post('/user/useroptions/',auth,(req,res)=>{
         lang:lang,
         photo:photo,
         when:when
-    })
+    }).then(()=>{res.status(200).json({sucess:"User Options Add"})}).catch((error)=>{res.status(400).json(error)})
 });
 
 
 router.get('/user/useroptions/',auth,(req,res)=>{
     const user = req.user;
-    console.log(user)
-    UserOptions.findAll({where:{userId:user.id}}).then((data)=>{
+    UserOptions.findAll({where:{userId:user.id},
+        include:[{model:UserIncluse}],
+
+        }).then((data)=>{
         if(data){
-            res.json(data)
+            res.status(200).json(data)
         } else {
-            res.json({error:'Não encontrado'})
+            res.status(404).json({error:'No Exist'})
         }
     })
 });
@@ -51,13 +53,7 @@ router.patch('/user/useroptions/',auth,(req,res)=>{
         when:when
     },{
         where:{[Op.and]: [{ id: req.body.id }, { userID: req.user.id }]}
-    }).then(()=>{
-        res.status(200).json({sucess:'Atualizado'})
-    
-    }).catch((error)=>{
-        res.status(400).json({error:'Erro Interno'})
-
-    })
+    }).then(()=>{res.status(200).json({sucess:'Update'})}).catch((error)=>{res.status(400).json(error)})
 });
 
 
@@ -65,7 +61,7 @@ router.patch('/user/useroptions/',auth,(req,res)=>{
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, __dirname + './../../../front/public/img/user')      //you tell where to upload the files,
+      cb(null, __dirname + './../../../front/public/img/user')      
     },
     filename: function (req, file, cb) {
         const namePhoto = uuid.v4() + Date.now() + '.png'
@@ -82,13 +78,10 @@ var storage = multer.diskStorage({
         callback(null, true)
     },
       onFileUploadStart: function (file) {
-        console.log(file.originalname + ' is starting ...')
       },
   });
   
   router.post('/user/photo', upload.single('file'), function (req, res, next) {
-    // req.file is the `avatar` file
-    console.log(req.file);
     const result = req.file
     res.status(200).json(result.filename)
     return false;
