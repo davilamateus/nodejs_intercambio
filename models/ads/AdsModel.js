@@ -32,6 +32,6 @@ const Ads = connection.define('ads',{
 
 
 
-Ads.sync({force:true});
+//Ads.sync({force:true});
 
 module.exports = Ads;

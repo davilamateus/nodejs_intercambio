@@ -16,6 +16,6 @@ const Api = require('./../../database/database')
             }
         })
 
-       // ForgetPassword.sync({force:true})
+       //ForgetPassword.sync({force:true})
 
         module.exports = ForgetPassword

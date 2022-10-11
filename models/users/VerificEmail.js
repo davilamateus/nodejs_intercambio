@@ -12,7 +12,7 @@ const Email = connection.define('verificEmail',{
     }
 });
 
-//VerificEmail.sync({force:true})
+//Email.sync({force:true})
 
 module.exports = Email;
 

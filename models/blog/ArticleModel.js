@@ -26,7 +26,6 @@ const Article = Api.define('article',{
     }
 });
 
-Article.belongsTo(CategoryModel);
 
 //Article.sync({force:true})
 
