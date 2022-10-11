@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../../models/users/Users')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const JWTsecret = require('../../middleware/JWTsecret');
 const nodemailer = require("nodemailer"); // Require the Nodemailer package
