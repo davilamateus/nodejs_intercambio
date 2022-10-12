@@ -9,32 +9,32 @@ const { Op } = require("sequelize");
 
 
 
-router.post('/admin/todolist/',auth,(req,res)=>{
-    const {title,description,category,status} = req.body;
+router.post('/admin/todolistsuggestion/',auth,(req,res)=>{
+    const {title,description,category,countryId} = req.body;
     const user = req.user
+    console.log(user)
+    if(user.category == 2){
+        ToDoList.create({
+            title:title,
+            countryId:countryId,
+            description:description,
+            category:category,
+            position:0
+        }).then(()=>{res.status(200).json({sucess:'To do list Add'})}).catch((error)=>{res.status(400).json(error)})
+    } else{
+        res.status(300).json({error:'No Auth'})
+    }
 
-    ToDoList.create({
-        title:title,
-        userId:req.user.id, 
-        status:status,
-        description:description,
-        category:category,
-        position:0
-    }).then(()=>{res.status(200).json({sucess:'To do list Add'})}).catch((error)=>{res.status(400).json(error)})
 });
 
 
-router.get('/todolist/',auth,(req,res)=>{
-    const id = req.user.id;
-
-    ToDoList.findAll(
-        {
-            order: ['position'],
-            where:{userId:id},})
+router.get('/todolistsuggestion/',(req,res)=>{
+    const countryId = req.query['countryId'];
+    ToDoList.findAll({where:{countryId:countryId}})
                 .then((data)=>{res.json({data})}).catch((error)=>{res.status(400).json(error)})
 });
 
-router.patch('/admin/todolist/',auth,(req,res)=>{
+router.patch('/admin/todolistsuggestion/',auth,(req,res)=>{
 
     console.log(req.body.status)
 
@@ -51,7 +51,7 @@ router.patch('/admin/todolist/',auth,(req,res)=>{
 });
 
 
-router.delete('/admin/todolist/:id',auth,(req,res)=>{
+router.delete('/admin/todolistsuggestion/:id',auth,(req,res)=>{
     ToDoList.destroy({
         where:{[Op.and]: [{ id: req.params.id }, { userID: req.user.id }]}
     }).then(()=>{
