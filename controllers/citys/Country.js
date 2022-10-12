@@ -7,7 +7,7 @@ const CountryModel = require('../../models/countries/CountryModel')
 
 
 
-router.get('/country', auth, (req,res)=>{
+router.get('/country',  (req,res)=>{
     CountryModel.findAll()
             .then((data)=>{res.status(200).json(data)})
             .catch((error)=>{res.status(400).json(error)});
