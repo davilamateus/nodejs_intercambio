@@ -37,12 +37,12 @@ router.get('/email/email-confirm/:token',(req,res)=>{
     host: "smtp.hostinger.com", 
     port: 465,
     auth: {
-      user: "no-reply@mateusdavila.com", 
+      user: "no-reply2@mateusdavila.com", 
       pass: "Goias123.", 
     },
   }); 
   let info = await transporter.sendMail({
-    from: "no-reply@mateusdavila.com",
+    from: "no-reply2@mateusdavila.com",
     to: `${req.body.email}`, 
     subject: "YET Planejador - Verificação de Email!",
     text: "Here's a text version of the email.",
