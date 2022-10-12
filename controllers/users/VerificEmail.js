@@ -37,12 +37,12 @@ router.get('/email/email-confirm/:token',(req,res)=>{
     host: "smtp.hostinger.com", 
     port: 465,
     auth: {
-      user: "new-user@mateusdavila.com", 
+      user: "no-reply@mateusdavila.com", 
       pass: "Goias123.", 
     },
   }); 
   let info = await transporter.sendMail({
-    from: "new-user@mateusdavila.com",
+    from: "no-reply@mateusdavila.com",
     to: `${req.body.email}`, 
     subject: "YET Planejador - Verificação de Email!",
     text: "Here's a text version of the email.",
@@ -52,7 +52,7 @@ router.get('/email/email-confirm/:token',(req,res)=>{
     
     <p style="text-align: center;">&nbsp;</p>
     
-    <p style="text-align: center;"> <h1>Email mudado</h1><a href="http://localhost:3001/confirm-email/${token}">http://localhost:3001/confirm-email/${token}</a></p>
+    <p style="text-align: center;"> <h1>Email mudado</h1><a href="https://mateusdavila.com/confirm-email/${token}">https://mateusdavila.com/confirm-email/${token}</a></p>
     
     <p style="text-align: center;">&nbsp;</p>
     `
