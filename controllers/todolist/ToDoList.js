@@ -10,13 +10,13 @@ const { Op } = require("sequelize");
 
 
 router.post('/user/todolist/',auth,(req,res)=>{
-    const {title,description,category,status} = req.body;
+    const {title,description,category} = req.body;
     const user = req.user
 
     ToDoList.create({
         title:title,
         userId:req.user.id, 
-        status:status,
+        status:1,
         description:description,
         category:category,
         position:0
