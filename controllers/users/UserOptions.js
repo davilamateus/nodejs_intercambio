@@ -14,12 +14,12 @@ const UserIncluse = require('./../../models/users/Users')
 
 
 router.post('/user/useroptions/',auth,(req,res)=>{
-    const {city,country,goal,lang,photo,when} = req.body;
+    const {city,countryId,goal,lang,photo,when} = req.body;
     const user = req.user;
     UserOptions.create({
         city:city,
         userId:user.id, 
-        country:country,
+        countryId:countryId,
         goal:goal,
         lang:lang,
         photo:photo,
@@ -43,10 +43,10 @@ router.get('/user/useroptions/',auth,(req,res)=>{
 });
 
 router.patch('/user/useroptions/',auth,(req,res)=>{
-    const {city,country,goal,lang,photo,when} = req.body
+    const {city,countryId,goal,lang,photo,when} = req.body
     UserOptions.update({
         city:city,
-        country:country,
+        countryId:countryId,
         goal:goal,
         lang:lang,
         photo:photo,
