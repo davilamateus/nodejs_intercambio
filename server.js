@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const Users = require('./models/users/Users');
 const ToDoList = require('./models/todolist/ToDoList');
+const ToDoListSuggestion = require('./models/todolist/ToDoListSuggestion');
 const Financce = require('./models/finance/FinanceModel');
 const UserOptions = require('./models/users/UserOptions');
 const VerificEmailModel = require('./models/users/VerificEmail')
@@ -22,6 +23,7 @@ const CommercialModel = require('./models/users/CommercialUser')
 const UsersController = require('./controllers/users/Users')
 const UserOptionsController = require('./controllers/users/UserOptions')
 const ToDoListController = require('./controllers/todolist/ToDoList')
+const ToDoListSuggestionController = require('./controllers/todolist/ToDoListSuggestion')
 const FinanceController = require('./controllers/finance/Finances')
 const VerificEmailControoler = require('./controllers/users/VerificEmail')
 const ForgetPasswordController  = require('./controllers/users/ForgetPassword')
@@ -53,6 +55,7 @@ connection
 
 app.use('/', UsersController)
 app.use('/', ToDoListController)
+app.use('/', ToDoListSuggestionController)
 app.use('/', FinanceController)
 app.use('/', UserOptionsController)
 app.use('/', VerificEmailControoler)
