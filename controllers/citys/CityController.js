@@ -20,6 +20,7 @@ router.get('/city', (req,res)=>{
 });
 
 router.get('/cities', (req,res)=>{
+    const countryId = req.query['countryId'];
         CityModel.findAll(        
             {where:{countryId:countryId}})
                 .then((data)=>{res.status(200).json(data)})
