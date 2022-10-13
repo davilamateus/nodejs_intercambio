@@ -9,15 +9,16 @@ const multer = require('multer')
 const uuid = require('uuid')
 const path = require('path')
 const UserIncluse = require('./../../models/users/Users')
+const cityModel = require('./../../models/cities/CityModel')
 
 
 
 
 router.post('/user/useroptions/',auth,(req,res)=>{
-    const {city,countryId,goal,lang,photo,when} = req.body;
+    const {cityId,countryId,goal,lang,photo,when} = req.body;
     const user = req.user;
     UserOptions.create({
-        city:city,
+        cityId:cityId,
         userId:user.id, 
         countryId:countryId,
         goal:goal,
@@ -31,7 +32,7 @@ router.post('/user/useroptions/',auth,(req,res)=>{
 router.get('/user/useroptions/',auth,(req,res)=>{
     const user = req.user;
     UserOptions.findAll({where:{userId:user.id},
-        include:[{model:UserIncluse}],
+        include:[{model:UserIncluse},{model:cityModel}],
 
         }).then((data)=>{
         if(data){
@@ -43,9 +44,9 @@ router.get('/user/useroptions/',auth,(req,res)=>{
 });
 
 router.patch('/user/useroptions/',auth,(req,res)=>{
-    const {city,countryId,goal,lang,photo,when} = req.body
+    const {cityId,countryId,goal,lang,photo,when} = req.body
     UserOptions.update({
-        city:city,
+        cityId:cityId,
         countryId:countryId,
         goal:goal,
         lang:lang,
