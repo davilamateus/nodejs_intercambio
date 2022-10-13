@@ -5,11 +5,11 @@ const Users = require('./Users');
 
 const UserOptions = connection.define('userOptions',{
     countryId:{
-        type:Sequelize.STRING,
+        type:Sequelize.INTEGER,
         allowNull:false
     },
-    city:{
-        type:Sequelize.STRING,
+    cityId:{
+        type:Sequelize.INTEGER,
         allowNull:false
     },
     goal:{
