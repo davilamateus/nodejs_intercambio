@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const connection = require('../../database/database');
 const Users = require('./Users');
+const CityModel = require('./../cities/CityModel')
 
 
 const UserOptions = connection.define('userOptions',{
@@ -36,6 +37,7 @@ const UserOptions = connection.define('userOptions',{
 });
 
 UserOptions.belongsTo(Users);
+CityModel.belongsTo(Users);
 
 //UserOptions.sync({force:true});
 
