@@ -32,7 +32,8 @@ router.post('/user/useroptions/',auth,(req,res)=>{
 router.get('/user/useroptions/',auth,(req,res)=>{
     const user = req.user;
     UserOptions.findAll({where:{userId:user.id},
-        include:[{model:UserIncluse},{model:cityModel}],
+        include:[{model:UserIncluse}],
+        include:[{model:cityModel}]
 
         }).then((data)=>{
         if(data){
