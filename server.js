@@ -15,13 +15,15 @@ const CategoryModel = require('./models/blog/CategoryModel');
 const AdsModel = require('./models/ads/AdsModel');
 const Article = require('./models/blog/ArticleModel');
 const Radio = require('./models/radio/RadioModels')
-const WordsModel = require('./models/study/WordsModels')
+const FlashCardsModel = require('./models/study/FlashCardsModels')
 const CoursesModel = require('./models/study/CoursesModels')
 const CountryModel = require('./models/countries/CountryModel')
 const CitysModel = require('./models/cities/CityModel')
 const CommercialModel = require('./models/users/CommercialUser')
+const UserFlashCardModel  = require('./models/study/UsersFlashCardsModels');
 const UsersController = require('./controllers/users/Users')
 const UserOptionsController = require('./controllers/users/UserOptions')
+const userFlashCards = require('./controllers/study/UsersFlashCardsController')
 const ToDoListController = require('./controllers/todolist/ToDoList')
 const ToDoListSuggestionController = require('./controllers/todolist/ToDoListSuggestion')
 const FinanceController = require('./controllers/finance/Finances')
@@ -31,11 +33,12 @@ const CategoryController = require('./controllers/blog/CategoryController');
 const ArticleController = require('./controllers/blog/ArticleController');
 const RadioController = require('./controllers/radios/RadiosController');
 const AdsController = require('./controllers/ads/AdsController');
-const WordsController = require('./controllers/study/WordsController');
+const WordsController = require('./controllers/study/FlashCardsController');
 const CoursesControoler = require('./controllers/study/CoursesController');
 const CountryController = require('./controllers/citys/Country');
 const CitiesController = require('./controllers/citys/CityController');
 const CommercialUserController = require('./controllers/users/Commercial');
+const SmsControoler = require('./sms/sms')
 
 app.use(cors());
 app.use((req,res,next)=>{
@@ -79,6 +82,8 @@ app.use('/', CountryController)
 app.use('/', CoursesControoler)
 app.use('/', CitiesController)
 app.use('/', CommercialUserController)
+app.use('/', SmsControoler)
+app.use('/', userFlashCards)
 
 
 

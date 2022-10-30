@@ -44,6 +44,7 @@ router.get('/blog/articles', (req,res)=>{
                 .catch((error)=>{res.status(400).json(error)});
     }
     else if(country != undefined){
+        console.log(country)
         ArticleModel.findAll({
             where:{countryId:country},
             include:[{model:CategoryModel}],
@@ -54,7 +55,11 @@ router.get('/blog/articles', (req,res)=>{
                 .catch((error)=>{res.status(400).json(error)});
     }
     else{
-       ArticleModel.findAll({include:[{model:CategoryModel}]})
+        console.log('*************************')
+
+       ArticleModel.findAll({
+        include:[{model:CategoryModel}]
+    })
                 .then((data)=>{res.status(200).json(data)})
                 .catch((error)=>{res.status(400).json(error)});
        

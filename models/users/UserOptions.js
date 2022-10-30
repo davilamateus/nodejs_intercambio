@@ -32,12 +32,16 @@ const UserOptions = connection.define('userOptions',{
     userId:{
         type:Sequelize.INTEGER,
         allowNull:false
+    },
+    phone:{
+        type:Sequelize.STRING,
+        allowNull:false
     }
 
 });
 
 UserOptions.belongsTo(Users);
-CityModel.belongsTo(Users);
+
 
 //UserOptions.sync({force:true});
 

@@ -8,14 +8,14 @@ const { Op } = require("sequelize");
 const multer = require('multer')
 const uuid = require('uuid')
 const path = require('path')
-const UserIncluse = require('./../../models/users/Users')
+const User = require('./../../models/users/Users')
 const cityModel = require('./../../models/cities/CityModel')
 
 
 
 
 router.post('/user/useroptions/',auth,(req,res)=>{
-    const {cityId,countryId,goal,lang,photo,when} = req.body;
+    const {cityId,countryId,goal,lang,photo,when,phone} = req.body;
     const user = req.user;
     UserOptions.create({
         cityId:cityId,
@@ -24,37 +24,42 @@ router.post('/user/useroptions/',auth,(req,res)=>{
         goal:goal,
         lang:lang,
         photo:photo,
-        when:when
+        when:when,
+        phone:phone,
     }).then(()=>{res.status(200).json({sucess:"User Options Add"})}).catch((error)=>{res.status(400).json(error)})
 });
 
 
 router.get('/user/useroptions/',auth,(req,res)=>{
     const user = req.user;
-    UserOptions.findAll({where:{userId:user.id},
+    UserOptions.findOne({where:{userId:user.id},
         include:[
-            {model:UserIncluse},
-            {model:cityModel}
+            {model:User }
+            
         ]
-
-        }).then((data)=>{
+        
+    })
+        .then((data)=>{
         if(data){
+            console.log('asdassdasdasdasdasdasdasd')
             res.status(200).json(data)
         } else {
-            res.status(404).json({error:'No Exist'})
+            res.status(201).json({error:'No Exist'})
         }
     })
 });
 
 router.patch('/user/useroptions/',auth,(req,res)=>{
-    const {cityId,countryId,goal,lang,photo,when} = req.body
+    const {cityId,countryId,goal,lang,photo,when,phone} = req.body
     UserOptions.update({
         cityId:cityId,
         countryId:countryId,
         goal:goal,
         lang:lang,
         photo:photo,
-        when:when
+        when:when,        
+        phone:phone,
+
     },{
         where:{[Op.and]: [{ id: req.body.id }, { userID: req.user.id }]}
     }).then(()=>{res.status(200).json({sucess:'Update'})}).catch((error)=>{res.status(400).json(error)})

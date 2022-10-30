@@ -9,16 +9,16 @@ const { Op } = require("sequelize");
 
 router.post('/admin/ads/', auth, (req, res) => {
 
-    const { title, country, imgWeb, imgMobile, link, category } = req.body;
+    const { title, countryId, imgWeb, imgMobile, link, commercial } = req.body;
 
     if (req.user.category == '2') {
 
-        if (title !== undefined && link !== undefined && country !== undefined && imgWeb !== undefined && category !== undefined && imgMobile !== undefined) {
+        if (title !== undefined && link !== undefined && countryId !== undefined && imgWeb !== undefined && commercial !== undefined && imgMobile !== undefined) {
 
             AdsModel.create({
                 title: title,
-                category: category,
-                country: country,
+                commercial: commercial,
+                countryId: countryId,
                 imgWeb: imgWeb,
                 imgMobile: imgMobile,
                 link: link})
@@ -38,10 +38,10 @@ router.post('/admin/ads/', auth, (req, res) => {
 
 router.get('/ads', (req, res) => {
     const country = req.query['country'];
-    const category = req.query['category'];
+    const commercial = req.query['commercial'];
 
     AdsModel.findAll({ 
-        where:{[Op.and]: [{ categoryId:category}, { country: country }]}})
+        where:{[Op.and]: [{ commercial:commercial}, { countryId: country }]}})
             .then((data) => { res.status(200).json(data) })
             .catch((error) => { res.status(400).json(error) });
 
@@ -49,7 +49,7 @@ router.get('/ads', (req, res) => {
 
 router.patch('/admin/ads/', auth, (req, res) => {
 
-    const { title, category, country, link, id,imgWeb,imgMobile } = req.body;
+    const { title, commercial, country, link, id,imgWeb,imgMobile } = req.body;
 
 
     if (req.user.category == '2') {
@@ -58,7 +58,7 @@ router.patch('/admin/ads/', auth, (req, res) => {
 
             AdsModel.update({
                 title: title,
-                category: category,
+                commercial: commercial,
                 country: country,
                 imgWeb: imgWeb,
                 imgMobile: imgMobile,

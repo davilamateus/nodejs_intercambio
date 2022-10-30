@@ -64,4 +64,38 @@ router.post('/user/add',(req,res)=>{
 });
 
 
+// check social
+
+router.post('/user/sociallogin', (req,res)=>{
+   const {email,socialId,name} = req.body
+   Users.findOne({where:{email:email}})
+   .then((data)=>{
+      console.log(socialId, name , email)
+      if(data!=null){
+         const token =  jwt.sign({name:data.name,id:data.id, category:data.category}, JWTsecret,{expiresIn:'1000h'});
+         res.status(200).json({message:'Password Correct', token:token});
+         console.log('USUARIOOO JA CADASTRADO')
+      } else{
+         console.log('Usario para cadatro')
+         let password = socialId
+         let salt = bcrypt.genSaltSync(10);
+         let hash = bcrypt.hashSync(password, salt)
+         
+         Users.create({
+            email:email,
+            name:name,
+            verified:true,
+            password:hash,
+            category:2,
+         })
+         .then((data)=>{
+                              const token =  jwt.sign({name:data.name,id:data.id, category:data.category}, JWTsecret,{expiresIn:'1000h'});
+                              res.status(200).json({message:'User Social add', token:token});
+                           })
+
+         }
+      })
+})
+
+
 module.exports = router

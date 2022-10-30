@@ -11,12 +11,26 @@ const { Op } = require("sequelize");
 
 // Get infor About a city
 router.get('/city', (req,res)=>{
-    const title = req.query['city']
-    CityModel.findAll(
-        {where:{title:title},
-        include:[{model:CountryModel}]})
-                .then((data)=>{res.status(200).json(data)})
-                .catch((error)=>{res.status(400).json(error)});
+    const cityId = req.query['cityId']
+    const cityName = req.query['cityName']
+    console.log(cityId)
+    if(cityId !== undefined){
+        CityModel.findOne(
+            {where:{id:cityId},
+            include:[{model:CountryModel}]
+        })
+        .then((data)=>{res.status(200).json(data)})
+        .catch((error)=>{res.status(400).json(error)});
+    } else{
+        console.log('******')
+        CityModel.findOne(
+            {where:{title:cityName},
+            include:[{model:CountryModel}]
+        })
+                    .then((data)=>{res.status(200).json(data)})
+                    .catch((error)=>{res.status(400).json(error)});
+    }
+
 });
 
 router.get('/cities', (req,res)=>{

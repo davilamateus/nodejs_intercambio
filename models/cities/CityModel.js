@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize');
 const Api = require('../../database/database');
-const CountryModell = require('../countries/CountryModel')
+const CountryModell = require('../countries/CountryModel');
+const UserOptions = require('../users/UserOptions');
 
 
-const City = Api.define('city',{
+const City = Api.define('cities',{
     title:{
         type:Sequelize.STRING,
         allowNull:false,
@@ -15,10 +16,15 @@ const City = Api.define('city',{
     img:{
         type:Sequelize.STRING,
         allowNull:false
+    },
+    countryId:{
+        type:Sequelize.INTEGER,
+        allowNull:false
     }
 });
 
 City.belongsTo(CountryModell);
+
 
 //City.sync({force:true})
 

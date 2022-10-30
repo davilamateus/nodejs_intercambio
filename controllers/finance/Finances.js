@@ -50,7 +50,8 @@ router.get('/user/finance/',auth,(req,res)=>{
 
 
 router.patch('/user/finance/',auth,(req,res)=>{
-    const {value, title, id, category} = res.body
+    const {value, title, id, category} = req.body
+
     Finance.update({
         value:value,
         title:title,
@@ -58,17 +59,16 @@ router.patch('/user/finance/',auth,(req,res)=>{
     },{
         where:{[Op.and]: [{ id: id }, { userID: req.user.id }]}})
                 .then(()=>{res.status(200).json({sucess:'Update'})
-                .catch((error)=>{res.status(400).json(error)})
     
     })
 });
 
 
 router.delete('/user/finance/',auth,(req,res)=>{
+    const id = req.query['id']
     Finance.destroy({
-        where:{[Op.and]: [{ id: req.body.id }, { userID: req.user.id }]}})
+        where:{[Op.and]: [{ id: id}, { userID: req.user.id }]}})
                 .then(()=>{ res.status(200).json({sucess:'Deletado'})
-                .catch((error)=>{res.status(400).json(error)}) 
     })
 });
 

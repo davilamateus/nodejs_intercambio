@@ -15,7 +15,7 @@ const Ads = connection.define('ads',{
         type:Sequelize.STRING,
         allowNull:false
     },
-    category:{
+    commercial:{
         type:Sequelize.INTEGER,
         allowNull:null
     },
